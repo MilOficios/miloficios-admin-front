@@ -1,0 +1,89 @@
+<app-loader [statusLoading]="statusLoading"></app-loader>
+<div [@routerTransition]>
+
+    <div>
+        <nz-table #basicTable [nzData]="afiliations" [nzShowPagination]="false" [nzFrontPagination]="false">
+            <thead>
+                <tr>
+                    <th class="text-center">ESTADO</th>
+                    <th>DNI</th>
+                    <th>NOMBRE</th>
+                    <th class="text-center">EMAIL</th>
+                    <th class="text-center">CELULAR</th>
+                    <th class="text-center">FECHA DE REGISTRO</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of basicTable.data;let i = index;" class="{{itemSelected.id === item.id ? 'row_selected' : ''}}">
+                    <td>{{ statusDefine(item) }}</td>
+                    <td>{{ item.nrodoc }}</td>
+                    <td>{{ item.nombres + ' ' + item.apellidos}}</td>
+                    <td class="text-center">{{ item.email }}</td>
+                    <td class="text-center">{{ item.phone }}</td>
+                    <td class="text-center">{{ dateDefine(item) }}</td>
+                    <td class="text-center">
+                        <nz-dropdown [nzTrigger]="'click'">
+                            <a nz-dropdown> <i nz-icon [nzType]="'setting'" [nzTheme]="'fill'"></i> </a>
+                            <ul nz-menu>
+                                <li nz-menu-item (click)="openModal(item)">Ver Detalle</li>
+                            </ul>
+                        </nz-dropdown>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+</div>
+
+<nz-modal
+      [(nzVisible)]="isVisibleModal"
+      nzTitle="Detalle de la afiliación ({{ statusDefine(item) }})"
+      [nzOkLoading]="modalLoading"
+      (nzOnCancel)="cancelModal()"
+      [nzWidth]="900"
+      [nzFooter]="null"
+    >
+    <nz-descriptions nzTitle="" nzBordered>
+      <nz-descriptions-item nzTitle="Nombre">{{ item.nombres + ' ' + item.apellidos}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Email">{{ item.email }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Teléfono">{{ item.phone }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Edad">
+        {{ ageDefine(item.fecnac) }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Fecha de registro" [nzSpan]="2">
+        {{ dateDefine(item) }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Status" [nzSpan]="3">
+        <nz-badge nzStatus="processing" nzText="{{statusDefine(item)}}"></nz-badge>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Dirección" [nzSpan]="3">
+        {{ item.direccion }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Experiencia en el Oficio" [nzSpan]="3">
+        {{ item.resexperiencia }}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Adjunto 1">
+        <button nz-button nzType="primary" nzShape="round" (click)="downloadImage(item.imagerecibo)"><i nz-icon nzType="download"></i></button>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Adjunto 2">
+        <button nz-button nzType="primary" nzShape="round"><i nz-icon nzType="download"></i></button>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Adjunto 3">
+        <button nz-button nzType="primary" nzShape="round"><i nz-icon nzType="download"></i></button>
+      </nz-descriptions-item>
+    </nz-descriptions>
+
+    <div *nzModalFooter>
+      <span>Modal Footer: </span>
+      <button nz-button nzType="default">Custom Callback</button>
+      <button nz-button nzType="primary">Custom Submit</button>
+    </div>
+
+    <div class="paginator_box">
+      <div class="mr-2"><button nz-button nzType="primary" (click)="openModal()"><i nz-icon nzType="check-circle" nzTheme="outline"></i>Aceptar</button></div>
+      <div class="mr-2"><button nz-button nzType="danger" (click)="clearFilter()"><i nz-icon nzType="close-circle" nzTheme="outline"></i>Rechazar</button></div>
+      <div class="mr-2"><button nz-button nzType="secondary" (click)="clearFilter()"><i nz-icon nzType="exclamation" nzTheme="outline"></i>Enviar para evaluación</button></div>
+  </div>
+</nz-modal>

@@ -1,0 +1,115 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/bootstrap";
+@import "spinner";
+@import "utils";
+@import "rtl";
+@import "responsive";
+
+@media print {
+  .breadcrumb {
+    display: none !important;
+  }
+}
+
+app-login {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+@media (max-width: 991.98px) {
+  .d-md-down-none {
+    display: none !important;
+  }
+}
+
+.form-control.validation-field.ng-touched.ng-invalid {
+  border-color: #f34235;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' v…C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z'/%3E%3C/svg%3E");
+}
+
+.round-state1 {
+  background: #ccc8c8;
+  height: 22px;
+  width: 22px;
+  border-radius: 11px;
+}
+
+.round-state2 {
+  background: #8ebce4;
+  height: 22px;
+  width: 22px;
+  border-radius: 11px;
+}
+
+.round-state3 {
+  background: #e44f4f;
+  height: 22px;
+  width: 22px;
+  border-radius: 11px;
+}
+
+.ant-drawer {
+  /*margin-top: 56px;*/
+}
+
+.alert-success {
+  border-color: #065a19 !important;
+}
+
+.alert-warning {
+  border-color: #a5872e !important;
+}
+
+.alert-info {
+  border-color: #348996 !important;
+}
+
+.alert-danger {
+  border-color: #d43445 !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.row_selected {
+  background: #99cfe475 !important;
+}
+
+.paginator_box {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  height: 34px;
+  margin-top: 16px;
+}
+
+.paginator_box input {
+  pointer-events: none;
+  border: none !important;
+  width: 22px;
+}
+
+.paginator_box .ant-pagination-item-link {
+  height: 32px !important;
+  background-color: #6c757d !important;
+  color: white !important;
+}
+
+.paginator_box .ant-pagination-item-link i {
+  margin-top: 10px;
+}
+
+.paginator-info {
+  font-weight: bold !important;
+  margin-right: 13px !important;
+  display: flex;
+  align-items: center;
+}
